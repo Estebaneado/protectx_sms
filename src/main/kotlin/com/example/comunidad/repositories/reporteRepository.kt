@@ -36,32 +36,3 @@ class UsuarioRepository(private val jdbcTemplate: JdbcTemplate) {
             WHERE u.email = ? OR u.documentoIdentidad = ?
     """
         return jdbcTemplate.update(
-            sql,
-            dto.nombreCompleto,
-            dto.numContacto,
-            dto.direccionResidencia,
-            id,
-            id
-        )
-    }
-
-    /*
-    * fun desactivarUsuario(): {
-aaaaaaaaaaaaaaaaaaaaaaa
-    }
-    * */
-
-    /*fun activarUsuario(): {
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakjjjjjjjjjjjjjjjjjjjjjjjjjj
-    }
-    */
-
-
-    fun eliminarUsuario(id: String): Int {
-        val sql = "DELETE FROM usuarios WHERE documentoIdentidad = ? OR email = ?"
-        return jdbcTemplate.update(sql, id, id)
-    }
-
-
-
-}
