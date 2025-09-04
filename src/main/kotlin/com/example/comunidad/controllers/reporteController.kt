@@ -1,4 +1,4 @@
-package com.example.comunidad.controllers
+package com.example.comunidad.controllers //<------ corregir nombre del modelo aquí (creo xddd)
 
 import org.springframework.web.bind.annotation.*
 import com.example.comunidad.models.dataClass.Reporte

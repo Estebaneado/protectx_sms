@@ -1,4 +1,4 @@
-package com.example.comunidad.models.dataClass
+package com.example.comunidad.models.dataClass //<------ corregir nombre del modelo aquí (creo xddd)
 
 data class Reporte (
     val categoriaReporte: String,

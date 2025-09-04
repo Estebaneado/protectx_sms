@@ -1,4 +1,4 @@
-package com.example.comunidad.repositories
+package com.example.comunidad.repositories //<------ corregir nombre del modelo aquí (creo xddd)
 
 import com.example.comunidad.models.dataClass.Reporte
 import org.springframework.stereotype.Repository

@@ -1,4 +1,4 @@
-package com.example.comunidad.services
+package com.example.comunidad.services //<------ corregir nombre del modelo aquí (creo xddd)
 
 import com.example.comunidad.models.dataClass.Reporte
 import org.springframework.stereotype.Service
