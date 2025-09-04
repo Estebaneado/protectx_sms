@@ -1,38 +1,27 @@
 package com.example.comunidad.repositories
-import com.example.comunidad.models.dataClass.User
-import org.springframework.jdbc.core.JdbcTemplate
+
+import com.example.comunidad.models.dataClass.Reporte
 import org.springframework.stereotype.Repository
 
 @Repository
-class UsuarioRepository(private val jdbcTemplate: JdbcTemplate) {
-
-        fun crear(usuario: User, hashedPassword: String): Int {
-        val sql = """
-                INSERT INTO users (
-                    nombresCompletos, email, contrasena, idrole, iduserStatus
-                ) VALUES (?, ?, ?, ?)
-            """
-        return jdbcTemplate.update(
-            sql,
-            usuario.nombresCompletos,
-            usuario.email,
-            usuario.idrole,
-            hashedPassword,
-            usuario.idrole,
-            usuario.iduserStatus,
-        )
+class ReporteRepository {
+    fun listarReportes(): List<Reporte> {
+        return emptyList()
     }
 
-
+    fun crearReporte(reporte: Reporte): Reporte {
+        return reporte
     }
 
-    fun editarUsuario(dto: UserUpdateDTO, id: String): Int {
-        val sql = """
-        UPDATE usuarios u
-        SET 
-            u.nombreCompleto = COALESCE(?, u.nombreCompleto),
-            u.numContacto = COALESCE(?, u.numContacto),
-            u.direccionResidencia = COALESCE(?, u.direccionResidencia)
-            WHERE u.email = ? OR u.documentoIdentidad = ?
-    """
-        return jdbcTemplate.update(
+    fun obtenerReporte(id: Long): Reporte? {
+        return null
+    }
+
+    fun actualizarReporte(id: Long, reporte: Reporte): Reporte {
+        return reporte
+    }
+
+    fun eliminarReporte(id: Long): Boolean {
+        return false
+    }
+}
