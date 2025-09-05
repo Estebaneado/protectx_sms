@@ -11,17 +11,18 @@ class ReporteController {
         return emptyList()
     }
 
+    // API BUSCAR REPORTES
+    @GetMapping("/id:.+")
+    fun buscarReporte(@PathVariable id: Long): Reporte? {
+        return null
+    }
+
     @PostMapping
     fun crearReporte(@RequestBody reporte: Reporte): Reporte {
         return reporte
     }
 
-    @GetMapping("/{id}")
-    fun obtenerReporte(@PathVariable id: Long): Reporte? {
-        return null
-    }
-
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     fun actualizarReporte(@PathVariable id: Long, @RequestBody reporte: Reporte): Reporte {
         return reporte
     }
