@@ -1,6 +1,15 @@
-package com.example.comunidad.models.dataClass
+package com.example.demo.model
 
-data class Rol (
-    val nombreRole: String,
-    val descripcion: String
+import jakarta.persistence.*
+
+@Entity
+@Table(name = "roles")
+data class Rol(
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0,
+
+    @Column(nullable = false, unique = true, length = 50)
+    var nombre: String = ""
 )
