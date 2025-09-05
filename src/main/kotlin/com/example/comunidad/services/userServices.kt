@@ -1,31 +1,30 @@
 package com.example.comunidad.services
 
-import com.example.comunidad.models.dataClass.User
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
+import com.example.comunidad.models.dataClass.User
+import com.example.comunidad.models.DTO.DTOcrearUser
+import com.example.comunidad.repositories.UserRepository
 
 @Service
-class UserServices {
+class UserService(
+    private val userRepository: UserRepository
+) {
+    private val passwordEncoder = BCryptPasswordEncoder()
+
     fun listarUsuarios(): List<User> {
-        return emptyList()
+        return userRepository.listarUsuarios()
     }
 
-    fun crearUsuario(user: User): User {
-        return user
+    fun buscarUsuario(id: String): List<User> {
+        return userRepository.buscarUsuario(id)
     }
 
-    fun obtenerUsuario(id: Long): User? {
-        return null
+    fun crearUsuario(user: DTOcrearUser) {
+        // ✅ usar la instancia que recibes, no la clase
+        val hashedPassword = passwordEncoder.encode(user.contrasena)
+        userRepository.crearUsuario(user, hashedPassword)
     }
 
-    fun actualizarUsuario(id: Long, user: User): User {
-        return user
-    }
 
-    fun activarUsuario(id: Long): Boolean {
-        return true
-    }
-
-    fun desactivarUsuario(id: Long): Boolean {
-        return true
-    }
 }

@@ -1,27 +1,27 @@
-package com.example.comunidad.services //<------ corregir nombre del modelo aquí (creo xddd)
+package com.example.comunidad.services
 
 import com.example.comunidad.models.dataClass.Reporte
+import com.example.comunidad.repositories.ReporteRepository
+import com.example.comunidad.models.DTO.CrearReporteDTO
+import com.example.comunidad.models.DTO.ReporteConUsuarioDTO
+
 import org.springframework.stereotype.Service
 
 @Service
-class ReporteServices {
+class ReporteService(
+    private val reporteRepository: ReporteRepository
+) {
+
     fun listarReportes(): List<Reporte> {
-        return emptyList()
+        return reporteRepository.listarReportes()
     }
 
-    fun crearReporte(reporte: Reporte): Reporte {
-        return reporte
+    fun buscarReportePorEmail(email: String): List<ReporteConUsuarioDTO> {
+        return reporteRepository.buscarReportePorEmail(email)
     }
 
-    fun obtenerReporte(id: Long): Reporte? {
-        return null
+    fun crearReporte(dto: CrearReporteDTO) {
+        reporteRepository.crearReporte(dto)
     }
 
-    fun actualizarReporte(id: Long, reporte: Reporte): Reporte {
-        return reporte
-    }
-
-    fun eliminarReporte(id: Long): Boolean {
-        return false
-    }
 }

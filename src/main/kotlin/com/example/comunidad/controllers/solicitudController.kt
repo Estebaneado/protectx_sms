@@ -1,29 +1,33 @@
 package com.example.comunidad.controllers
 
-import org.springframework.web.bind.annotation.*
 import com.example.comunidad.models.dataClass.Solicitud
+import com.example.comunidad.services.SolicitudService
+import org.springframework.web.bind.annotation.*
+import com.example.comunidad.models.DTO.SolicitudConUsuarioDTO
+import com.example.comunidad.models.DTO.CrearSolicitudDTO
+
+
 
 @RestController
 @RequestMapping("/solicitudes")
-class SolicitudController {
+class SolicitudController(private val solicitudService: SolicitudService) {
+
 	@GetMapping
 	fun listarSolicitudes(): List<Solicitud> {
-		return emptyList()
+		return solicitudService.listarSolicitudes()
 	}
 
-	// API BUSCAR SOLICITUDES
-	@GetMapping("/id:.+")
-	fun buscarSolicitudes(@PathVariable id: Long): Solicitud? {
-		return null
+	// Buscar por idsolicitud o iduser
+	@GetMapping("/{email:.+}")
+	fun buscarSolicitudPorEmail(@PathVariable email: String): List<SolicitudConUsuarioDTO> {
+		return solicitudService.buscarSolicitudPorEmail(email)
 	}
 
 	@PostMapping
-	fun crearSolicitud(@RequestBody solicitud: Solicitud): Solicitud {
-		return solicitud
+	fun crearSolicitud(@RequestBody dto: CrearSolicitudDTO): String {
+		solicitudService.crearSolicitud(dto)
+		return "Solicitud creada con éxito"
 	}
 
-	@PatchMapping("/{id}")
-	fun actualizarSolicitud(@PathVariable id: Long, @RequestBody solicitud: Solicitud): Solicitud {
-		return solicitud
-	}
+
 }

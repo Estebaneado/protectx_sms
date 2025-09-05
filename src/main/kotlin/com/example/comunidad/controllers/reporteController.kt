@@ -1,34 +1,34 @@
-package com.example.comunidad.controllers //<------ corregir nombre del modelo aquí (creo xddd)
+package com.example.comunidad.controllers
 
 import org.springframework.web.bind.annotation.*
 import com.example.comunidad.models.dataClass.Reporte
+import com.example.comunidad.services.ReporteService
+import com.example.comunidad.models.DTO.CrearReporteDTO
+import com.example.comunidad.models.DTO.ReporteConUsuarioDTO
+
 
 @RestController
 @RequestMapping("/reportes")
-class ReporteController {
+class ReporteController(
+    private val reporteService: ReporteService
+) {
+
+    // Listar todos los reportes
     @GetMapping
     fun listarReportes(): List<Reporte> {
-        return emptyList()
+        return reporteService.listarReportes()
     }
 
-    // API BUSCAR REPORTES
-    @GetMapping("/id:.+")
-    fun buscarReporte(@PathVariable id: Long): Reporte? {
-        return null
+    // Buscar reportes por email
+    @GetMapping("/{email:.+}")
+    fun buscarReportePorEmail(@PathVariable email: String): List<ReporteConUsuarioDTO> {
+        return reporteService.buscarReportePorEmail(email)
     }
 
+    // Crear un nuevo reporte
     @PostMapping
-    fun crearReporte(@RequestBody reporte: Reporte): Reporte {
-        return reporte
-    }
-
-    @PatchMapping("/{id}")
-    fun actualizarReporte(@PathVariable id: Long, @RequestBody reporte: Reporte): Reporte {
-        return reporte
-    }
-
-    @DeleteMapping("/{id}")
-    fun eliminarReporte(@PathVariable id: Long): Boolean {
-        return false
+    fun crearReporte(@RequestBody dto: CrearReporteDTO) {
+        reporteService.crearReporte(dto)
     }
 }
+

@@ -1,27 +1,29 @@
 package com.example.comunidad.services
 
 import com.example.comunidad.models.dataClass.Solicitud
+import com.example.comunidad.models.DTO.SolicitudConUsuarioDTO
+import com.example.comunidad.models.DTO.CrearSolicitudDTO
+
+
+import com.example.comunidad.repositories.SolicitudRepository
 import org.springframework.stereotype.Service
 
 @Service
-class SolicitudServices {
+class SolicitudService(private val solicitudRepository: SolicitudRepository) {
+
     fun listarSolicitudes(): List<Solicitud> {
-        return emptyList()
+        return solicitudRepository.listarSolicitudes()
     }
 
-    fun crearSolicitud(solicitud: Solicitud): Solicitud {
-        return solicitud
+    fun buscarSolicitudPorEmail(email: String): List<SolicitudConUsuarioDTO> {
+        return solicitudRepository.buscarSolicitudPorEmail(email)
     }
 
-    fun obtenerSolicitud(id: Long): Solicitud? {
-        return null
+
+    fun crearSolicitud(dto: CrearSolicitudDTO) {
+        solicitudRepository.crearSolicitud(dto)
     }
 
-    fun actualizarSolicitud(id: Long, solicitud: Solicitud): Solicitud {
-        return solicitud
-    }
 
-    fun eliminarSolicitud(id: Long): Boolean {
-        return false
-    }
+
 }
